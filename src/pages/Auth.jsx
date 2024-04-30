@@ -7,7 +7,7 @@ import SignUpForm from "@/components/SignUpForm"
 import SignInForm from "@/components/SignInForm"
 
 const Auth = () => {
-
+    const [isSignUp, setSignUp] = useState(false)
     const url = 'http://localhost/api/auth'
     // const { checkLoginState } = useContext(AuthContext)
 
@@ -53,7 +53,12 @@ const Auth = () => {
     // }
     return (
         <>
-            <SignInForm></SignInForm>
+            {isSignUp ? (
+                <SignUpForm />
+            ) : (
+                <SignInForm />
+            )}
+
         </>
     )
 

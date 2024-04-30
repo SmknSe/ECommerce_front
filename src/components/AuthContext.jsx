@@ -7,10 +7,9 @@ export const AuthContext = createContext()
 const AuthContextProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [user, setUser] = useState(null)
-    const url = 'http://localhost/api/auth'
     const checkLoginState = useCallback(async () => {
         try {
-            const response = await axios.get(`${url}/info`)
+            const response = await axios.get('/users/current')
             if (response.status === 200) {
                 setLoggedIn(true)
                 setUser(response.data)
@@ -28,5 +27,4 @@ const AuthContextProvider = ({ children }) => {
 
     return <AuthContext.Provider value={{ loggedIn, checkLoginState, user }}>{children}</AuthContext.Provider>
 }
-const AuthContextProviderr = memo(AuthContextProvider)
-export default AuthContextProviderr
+export default AuthContextProvider
