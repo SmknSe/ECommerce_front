@@ -15,8 +15,6 @@ import axios from "axios"
 import { useToast } from "./ui/use-toast"
 import { flushSync } from "react-dom"
 import useViewNavigate from "@/lib/hooks/viewNavigate"
-import { useNavigate } from "react-router-dom"
-import { AuthContext } from "./AuthContext"
 
 const schema = z.object({
     username: z.string().trim().min(1, ''),
@@ -47,6 +45,7 @@ const SignInForm = () => {
                 navigate('/')
 
         } catch (err) {
+            setLoading(false)
             toast({
                 variant: 'destructive',
                 title: 'Uh oh! Something went wrong',

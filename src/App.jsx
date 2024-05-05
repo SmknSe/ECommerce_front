@@ -8,6 +8,9 @@ import Home from './pages/Home'
 import useViewNavigate from './lib/hooks/viewNavigate'
 import Protected from './components/Protected'
 import { useContext } from 'react'
+import Categories from './pages/Categories'
+import Products from './pages/Products'
+import Header from './components/Header'
 
 function App() {
   axios.defaults.withCredentials = true
@@ -16,13 +19,15 @@ function App() {
   useContext(AuthContext)
   return (
     <AuthContextProvider>
-      <div className="h-full">
+      <div className="flex flex-col h-full">
         <BrowserRouter>
-          {/* header */}
+          <Header />
           <div className="p-6 overflow-auto w-full h-full">
             <Routes>
               <Route path="/" exact element={<Home />} />
               <Route path="/auth" element={<Protected><Auth /></Protected>} />
+              <Route path="/products" element={< Categories />} />
+              <Route path="/:category" element={< Products />} />
             </Routes>
           </div>
         </BrowserRouter>

@@ -21,9 +21,9 @@ const AuthContextProvider = ({ children }) => {
         }
     }, [])
 
-    useEffect(() => {
-        checkLoginState()
-    }, [checkLoginState])
+    // useEffect(() => {
+    //     checkLoginState()
+    // }, [checkLoginState])
 
     return <AuthContext.Provider value={{ loggedIn, checkLoginState, user }}>{children}</AuthContext.Provider>
 }
