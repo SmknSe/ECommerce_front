@@ -98,9 +98,9 @@ const SignIn = () => {
 
     useEffect(() => {
 
-        // refresh().then((response) => {
-        //     if (response) navigate(from, options)
-        // })
+        refresh().then((response) => {
+            if (response) navigate(from, options)
+        })
 
         if (inputRef.current)
             inputRef.current.focus()

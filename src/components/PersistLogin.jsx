@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { LoaderCircle } from "lucide-react";
 import useLogout from "@/lib/hooks/useLogout";
-import axios from "@/api/axios";
 
 const PersistLogin = () => {
     const [isLoading, setIsLoading] = useState(true)

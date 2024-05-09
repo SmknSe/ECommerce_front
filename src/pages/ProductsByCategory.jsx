@@ -5,22 +5,25 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 
-const Products = () => {
+const ProductsByCategory = () => {
     const [isLoading, setLoading] = useState(true)
     const [products, setProducts] = useState([])
     const location = useLocation()
-    const currentCategory = location.pathname.replace('/', '')
+    
+    const currentCategory = location.pathname.split('/')[0]
+    console.log();
+    console.log(currentCategory);
     useEffect(() => {
         const fetchProductsByCategory = async (category) => {
             const response = await axios.get(`/products?category=${category}`)
-            console.log(response);
+            console.log(response)
             if (response.status === 200) {
                 return response.data
                 // transition(() => {
                 //     setProducts(response.data.products)
                 //     setLoading(false)
                 // })
-                // console.log(response.data);
+                // console.log(response.data)
             }
             // return []
         }
@@ -34,8 +37,7 @@ const Products = () => {
     }, [])
     return (
         <>
-            <h1>Products</h1>
-            {isLoading && <h2>Loading...</h2>}
+            {/* {isLoading && <h2>Loading...</h2>}
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
 
                 {products.map(product =>
@@ -64,10 +66,10 @@ const Products = () => {
                         </div>
                     </Card>
                 )}
-            </div>
+            </div> */}
 
         </>
     )
 }
 
-export default Products
+export default ProductsByCategory
