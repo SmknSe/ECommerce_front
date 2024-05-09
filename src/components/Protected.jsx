@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react"
-import { AuthContext } from "./AuthContext"
 import { Navigate, useLocation, useNavigate } from "react-router-dom"
+import AuthContext from "./context/AuthContext"
 
 const Protected = ({ children }) => {
     const location = useLocation()

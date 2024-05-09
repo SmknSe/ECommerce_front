@@ -5,10 +5,10 @@ import { useEffect } from "react";
 
 const useViewNavigate = () => {
     const navigate = useNavigate()
-    return (to) => {
+    return (to, options = {}) => {
         transition(() => {
             flushSync(() => {
-                navigate(to)
+                navigate(to, options)
             })
         })
     }

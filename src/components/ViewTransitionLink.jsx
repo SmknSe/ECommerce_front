@@ -1,23 +1,20 @@
-import transition from "@/lib/transition";
-import { flushSync } from "react-dom";
-import { useNavigate } from "react-router-dom";
+import useViewNavigate from "@/lib/hooks/viewNavigate";
+import { Link, Navigate, useLocation } from "react-router-dom";
 
-const ViewTransitionLink = ({ to, children }) => {
-    const navigate = useNavigate();
+const ViewTransitionLink = ({ to, children, options }) => {
+    const navigate = useViewNavigate()
+    const location = useLocation()
     return (
-        <a
+        <Link
             href={to}
             onClick={(ev) => {
                 ev.preventDefault();
-                transition(() => {
-                    flushSync(() => {
-                        navigate(to)
-                    });
-                })
+                if (to != location.pathname)
+                    navigate(to, options)
             }}
         >
             {children}
-        </a>
+        </Link>
     );
 };
 
