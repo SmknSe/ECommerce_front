@@ -17,7 +17,7 @@ import { useLocation } from "react-router-dom"
 import ViewTransitionLink from "@/components/ViewTransitionLink"
 
 const schema = z.object({
-    username: z.string().trim().min(3, 'Required length is from 3 to 16 characters').max(16, 'Required length from 3 to 16 characters'),
+    name: z.string().trim().min(3, 'Required length is from 3 to 16 characters').max(16, 'Required length from 3 to 16 characters'),
     email: z.string().email('Invalid e-mail format'),
     password: z.string().trim().min(6, 'Too short').max(32, 'Too long'),
     passwordConfirmation: z.string()
@@ -44,7 +44,7 @@ const SignUp = () => {
 
     const form = useForm({
         defaultValues: {
-            username: '',
+            name: '',
             email: '',
             password: '',
             passwordConfirmation: ''
@@ -75,7 +75,7 @@ const SignUp = () => {
                 toast({
                     variant: 'destructive',
                     title: 'Conflict',
-                    description: 'Username or e-mail already taken',
+                    description: 'name or e-mail already taken',
                 })
             }
             if (response.status === 200) {
@@ -112,10 +112,10 @@ const SignUp = () => {
                         <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4" noValidate>
                             <FormField
                                 control={form.control}
-                                name="username"
+                                name="name"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Username</FormLabel>
+                                        <FormLabel>name</FormLabel>
                                         <FormControl>
                                             <Input placeholder="JohnDoe" {...field} ref={inputRef} />
 

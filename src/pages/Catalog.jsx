@@ -14,33 +14,6 @@ import useViewNavigate from "@/lib/hooks/viewNavigate"
 import { ToastAction } from "@/components/ui/toast"
 import { useLocation, useNavigate } from "react-router-dom"
 
-// const getImage = async (product) => {//     try {
-//         const response = await fetch(`http://localhost:8080/api/images/${product.imgName}`);
-
-//         if (!response.ok)
-//             return {
-//                 ...product,
-//                 isLoaded: true,
-//                 imgUrl: null
-//             };
-//         const imgData = await response.blob();
-//         const imgUrl = URL.createObjectURL(imgData);
-//         return {
-//             ...product,
-//             isLoaded: true,
-//             imgUrl
-//         };
-//     } catch (error) {
-//         console.error(error);
-//     }
-// };
-// const getImages = async () => {
-//     const fetchedProductsCopy = [...fetchedProducts];
-//     for (let i = 0; i < fetchedProductsCopy.length; i++) {
-//         fetchedProductsCopy[i] = await getImage(fetchedProductsCopy[i]);
-//         products.set(fetchedProductsCopy);
-//     }
-// };
 
 const Catalog = () => {
     const { auth } = useAuth()
@@ -56,7 +29,7 @@ const Catalog = () => {
             event.target.disabled = true
         })
         try {
-            await axiosPrivate.post(`/cart/items?productId=${productId}`, {}, {
+            await axiosPrivate.post(`/orders/cart/${productId}`, {}, {
                 validateStatus: (status) => status === 200
             })
             event.target.innerText = 'Added'
@@ -75,6 +48,11 @@ const Catalog = () => {
                         navigate('/login', { state: { from: location } })
                     }}>Sign In</ToastAction>
                 })
+            else if (err.response?.status === 400)
+                toast({
+                    title: 'Oops!',
+                    description: err.response.data
+                })
         }
     }
 
@@ -82,14 +60,6 @@ const Catalog = () => {
         const fetchCategories = async () => {
             const response = await axios.get('/categories')
             return response.data
-        }
-        const fetchProductsByCategory = async (category) => {
-            try {
-                const response = await axios.get(`/products?category=${category}&limit=5`)
-                return response.data.products
-            } catch (err) {
-                console.error(err);
-            }
         }
         fetchCategories().then((categories) => {
             if (categories) {
@@ -99,10 +69,9 @@ const Catalog = () => {
                 })
                 for (const category of categories) {
                     const name = category.name
-                    fetchProductsByCategory(name).then((fetchedProducts) => {
-                        transition(() => {
-                            setProducts(prev => ({ ...prev, [name]: fetchedProducts }))
-                        })
+                    const products = category.products;
+                    transition(() => {
+                        setProducts(prev => ({ ...prev, [name]: products }))
                     })
                 }
             }
@@ -149,11 +118,18 @@ const Catalog = () => {
                                                                         </p>
 
                                                                     </CardTitle>
+                                                                    {product && <CardDescription >
+                                                                        <ViewTransitionLink disabled={!product} to={`/catalog/${category.name}/${product?.id}`}>
+                                                                            <span className='text-foreground underline-offset-4 hover:underline'>
+                                                                                See more details
+                                                                            </span>
+                                                                        </ViewTransitionLink>
+                                                                    </CardDescription>}
                                                                 </CardHeader>
                                                                 <CardContent className='p-3 pt-0 flex justify-center items-end border-b' >
                                                                     {product ? (
                                                                         <div className="h-[120px] flex">
-                                                                            <object data={`http://localhost:8080/api/images/${product.imgName}`} type="image/png">
+                                                                            <object data={`http://localhost:8080/api/images/${product.productImg}`} type="image/png">
                                                                                 <img className='h-full' src='furniture.png' alt={`${product.title} image`} />
                                                                             </object>
                                                                         </div>

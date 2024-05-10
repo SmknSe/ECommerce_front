@@ -11,6 +11,7 @@ import Profile from './pages/Profile'
 import Catalog from './pages/Catalog'
 import Cart from './pages/Cart'
 import ProductsByCategory from './pages/ProductsByCategory'
+import Product from './pages/Product'
 
 function App() {
   // axios.defaults.baseURL = 'https://e-commerce-spring.onrender.com/api/'
@@ -18,11 +19,12 @@ function App() {
     <Routes>
       <Route path='/' element={<Layout />}>
 
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Catalog />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/catalog" element={< Catalog />} />
         <Route path="/catalog/:category" element={< ProductsByCategory />} />
+        <Route path="/catalog/:category/:id" element={< Product />} />
 
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth />}>

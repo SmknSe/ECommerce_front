@@ -18,8 +18,9 @@ const Cart = () => {
 
     const fetchCart = async () => {
         try {
-            const response = await axiosPrivate.get('/cart')
-            return response.data
+            const response = await axiosPrivate.get('/orders/cart')
+            console.log(response.data?.data);
+            return response.data?.data
         } catch (error) {
             console.log(error)
         }
@@ -27,7 +28,7 @@ const Cart = () => {
     const deleteFromCart = async (itemId) => {
         transition(() => setIsLoading(true))
         try {
-            const response = await axiosPrivate.delete(`/cart/items/${itemId}`)
+            const response = await axiosPrivate.delete(`/orders/cart/${itemId}`)
             if (response.status === 200) {
                 setIsLoading(false)
                 toast({
@@ -58,7 +59,7 @@ const Cart = () => {
     const checkOut = async () => {
         transition(() => setIsLoading(true))
         try {
-            const response = await axiosPrivate.post('/cart/checkout')
+            const response = await axiosPrivate.post('/orders/cart/confirm')
             if (response.status === 200) {
                 navigate('/')
                 toast({
@@ -89,7 +90,7 @@ const Cart = () => {
 
 
 
-                {cart && cart.items?.length > 0 ? (
+                {cart && cart.products?.length > 0 ? (
                     <>
                         <div className="p-4 rounded-md bg-accent flex justify-center items-center gap-x-5">
                             <h2 className='text-lg text-secondary-foreground font-semibold'>Total: {cart?.total && `$ ${cart.total}`}</h2>
@@ -107,12 +108,12 @@ const Cart = () => {
                             </div>
                             <ScrollArea className="h-[60vh]">
                                 <div className="flex flex-col w-full gap-y-4 px-3">
-                                    {cart.items.map((item) =>
+                                    {cart.products.map((item) =>
                                         <Card key={item.id} className="flex">
                                             <CardHeader className='p-4'>
                                                 <CardTitle className="text-base text-balance">
                                                     <div className="max-w-[120px]">
-                                                        <object className="w-full" data={`http://localhost:8080/api/images/${item.product.imgName}`} type="image/png">
+                                                        <object className="w-full" data={`http://localhost:8080/api/images/${item.productImg}`} type="image/png">
                                                             <img className='w-full' src='furniture.png' alt="IMAGE" />
                                                         </object>
                                                     </div>
@@ -120,8 +121,8 @@ const Cart = () => {
                                             </CardHeader>
                                             <CardContent className='p-4 border-x w-[150px]'>
                                                 <p className="h-full font-semibold flex flex-col gap-y-3 justify-between items-end text-sm md:text-base">
-                                                    <span className="w-full">{item.product.title}</span>
-                                                    <span>$ {item.product.price}</span>
+                                                    <span className="w-full">{item.title}</span>
+                                                    <span>$ {item.price}</span>
                                                 </p>
                                             </CardContent>
                                             <CardFooter >
@@ -140,7 +141,7 @@ const Cart = () => {
 
                     </>
                 )
-                    : cart?.items?.length == 0 &&
+                    : cart?.products?.length == 0 &&
                     (
                         <div className="flex h-3/4 flex-col gap-5 justify-center items-center max-w-[500px]">
 

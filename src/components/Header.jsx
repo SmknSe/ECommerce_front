@@ -9,7 +9,7 @@ const Header = () => {
             <div className="container px-6 sm:px-8 flex h-14 max-w-screen-2xl items-center justify-between">
                 <ViewTransitionLink to='/'>
                     <div className="flex gap-3">
-                        <img src="sofa512x.png" className="h-7" alt="" />
+                        <img src="../sofa512x.png" className="h-7" alt="" />
                         <span className="text-xl font-medium">
                             Furniture Shop
                         </span>

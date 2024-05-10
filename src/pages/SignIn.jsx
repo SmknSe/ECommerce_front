@@ -21,7 +21,7 @@ import ViewTransitionLink from "@/components/ViewTransitionLink"
 import useRefresh from "@/lib/hooks/useRefresh"
 
 const schema = z.object({
-    username: z.string().trim().min(1, ''),
+    email: z.string().trim().min(1, ''),
     password: z.string().trim().min(1, '')
 })
 
@@ -44,7 +44,7 @@ const SignIn = () => {
 
     const form = useForm({
         defaultValues: {
-            username: '',
+            email: '',
             password: ''
         },
         resolver: zodResolver(schema)
@@ -121,10 +121,10 @@ const SignIn = () => {
                         <form autoComplete="off" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-y-4" noValidate>
                             <FormField
                                 control={form.control}
-                                name="username"
+                                name="email"
                                 render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel>Username/E-mail</FormLabel>
+                                        <FormLabel>E-mail</FormLabel>
                                         <FormControl>
                                             <Input {...field} ref={inputRef} />
                                         </FormControl>
