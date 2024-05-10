@@ -8,8 +8,8 @@ const NotFound = () => {
         <div className="flex h-3/4 flex-col gap-5 justify-center items-center max-w-[500px] m-auto">
 
             <MonitorXIcon className="h-10 w-10" />
-            <span className="text-2xl flex align-middle">Oops!</span>
-            <span className="text-xl text-center">Unfortunately, there is nothing here...</span>
+            <span className="text-2xl font-semibold">Oops!</span>
+            <span className="text-xl text-balance text-center font-semibold">Unfortunately, there is nothing here...</span>
             <Button><ViewTransitionLink to={'/'}>Back to main page</ViewTransitionLink></Button>
 
         </div>

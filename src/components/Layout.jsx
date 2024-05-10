@@ -11,8 +11,8 @@ const Layout = () => {
                 <div className="py-6 container relative">
                     <Outlet />
                 </div>
-                <Toaster />
             </main>
+            <Toaster />
             <Footer />
         </div>
 
