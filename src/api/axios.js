@@ -1,5 +1,5 @@
 import axios from "axios"
-const BASE_URL = 'https://ecommerce-1dbp.onrender.com/api/'
+const BASE_URL = 'https://ecommerce-1dbp.onrender.com:8080/api/'
 
 export default axios.create({
     baseURL: BASE_URL
