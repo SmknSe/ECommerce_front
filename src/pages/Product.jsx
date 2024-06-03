@@ -101,7 +101,7 @@ const Product = () => {
                                 </h2>
 
                                 <Card className="bg-secondary p-1 w-2/3 sm:max-w-[400px]  sm:w-[300px]  md:w-[400px] lg:w-[500px]">
-                                    <object className="w-full  rounded-sm" data={`http://localhost:8080/api/images/${product?.productImg}`} type="image/png">
+                                    <object className="w-full  rounded-sm" data={`https://ecommerce-1dbp.onrender.com/api/images/${product?.productImg}`} type="image/png">
                                         <img className='h-full transition' src='../../furniture.png' alt={`${product?.title} image`} />
                                     </object>
                                 </Card>

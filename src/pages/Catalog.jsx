@@ -129,7 +129,7 @@ const Catalog = () => {
                                                                 <CardContent className='p-3 pt-0 flex justify-center items-end border-b' >
                                                                     {product ? (
                                                                         <div className="h-[120px] flex">
-                                                                            <object data={`http://localhost:8080/api/images/${product.productImg}`} type="image/png">
+                                                                            <object data={`https://ecommerce-1dbp.onrender.com/api/images/${product.productImg}`} type="image/png">
                                                                                 <img className='h-full' src='furniture.png' alt={`${product.title} image`} />
                                                                             </object>
                                                                         </div>

@@ -113,7 +113,7 @@ const Cart = () => {
                                             <CardHeader className='p-4'>
                                                 <CardTitle className="text-base text-balance">
                                                     <div className="max-w-[120px]">
-                                                        <object className="w-full" data={`http://localhost:8080/api/images/${item.productImg}`} type="image/png">
+                                                        <object className="w-full" data={`https://ecommerce-1dbp.onrender.com/api/images/${item.productImg}`} type="image/png">
                                                             <img className='w-full' src='furniture.png' alt="IMAGE" />
                                                         </object>
                                                     </div>
